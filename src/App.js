@@ -34,7 +34,7 @@ function App() {
 
 
   return (
-    <>
+    <div className='mainContainer'>
       {students.map((student, index) => {
         return(
           <Card className='studentCardContainer' key={index}>
@@ -51,7 +51,7 @@ function App() {
       })
 
       }
-    </>
+    </div>
   )
 }
 

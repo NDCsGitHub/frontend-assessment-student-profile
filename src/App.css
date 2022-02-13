@@ -1,10 +1,25 @@
-h1 {
-  text-align: center;
+html, body{
+  height:100%;
+  background-color: rgb(226, 226, 226);
+  overflow: hidden;
+}
 
+#root{
+  height: 100%;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+.mainContainer{
+  width:80rem;
+  height: 40rem;
+  overflow:auto;
+  background-color: white;
+  border-radius:10px;
 }
 
 .studentCardContainer{
-  border: black solid 1px;
+
 }
 
 .studentImg{
@@ -12,3 +27,4 @@ h1 {
   border: solid rgb(184, 169, 169) 1px;
   width: 5rem;
 }
+
