@@ -25,7 +25,11 @@ function App() {
 
   // calculate Average Score
   function getAverageGrade(gradeArray){
-    gradeArray.reduce((previousValue, currentValue) => )
+    let gradeNumber = gradeArray.map(i=>Number(i))
+    let average = gradeNumber.reduce((accumulator, currentValue) => {
+      return accumulator+currentValue
+    })
+    return average/gradeArray.length
   }
 
 
@@ -41,7 +45,7 @@ function App() {
             <p>Email: {student.email}</p>
             <p>Company: {student.company}</p>
             <p>Skill: {student.skill}</p>
-            <p>Average:</p>
+            <p>Average: {getAverageGrade(student.grades)}%</p>
           </Card>
         )
       })
