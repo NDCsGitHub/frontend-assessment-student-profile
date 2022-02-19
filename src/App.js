@@ -42,13 +42,17 @@ function App() {
           <Card className='studentCardContainer' key={index}>
             <Card.Img className='studentImg' src={student.pic} ></Card.Img>
 
-            <h3>{student.firstName} {student.lastName}</h3>
-
-            <p>Email: {student.email}</p>
-            <p>Company: {student.company}</p>
-            <p>Skill: {student.skill}</p>
-            <p>Average: {getAverageGrade(student.grades)}%</p>
+            <div className='nameContainer'>
+              <div className='firstName'>{(student.firstName+" "+student.lastName).toUpperCase()}</div>
+              <div className='detailContainer'>
+                <div>Email: {student.email}</div>
+                <div>Company: {student.company}</div>
+                <div>Skill: {student.skill}</div>
+                <div>Average: {getAverageGrade(student.grades)}%</div>
+              </div>
+            </div>
           </Card>
+
         )
       })
 
