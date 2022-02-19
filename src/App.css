@@ -11,8 +11,8 @@ html, body{
   align-items: center;
 }
 .mainContainer{
-  width:80rem;
-  height: 40rem;
+  width: 70%;
+  height: 80%;
   overflow:auto;
   background-color: white;
   border-radius:10px;
