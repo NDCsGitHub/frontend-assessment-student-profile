@@ -16,6 +16,9 @@ html, body{
   overflow:auto;
   background-color: white;
   border-radius:10px;
+  display:flex;
+  flex-direction: column;
+  
 }
 
 .studentCardContainer{
@@ -24,7 +27,7 @@ html, body{
   flex-direction: row;
   justify-content: flex-start;
   align-items: start;
-  height:12.5rem;
+  /* height:12.5rem; */
 }
 
 .studentImg{
@@ -52,5 +55,20 @@ html, body{
 
 .detailContainer *{
   padding:2px;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
+}
+
+.searchInput{
+  width:82rem;
+  align-self: center;
+  outline: 0;
+  border-width: 0 0 1px;
+  border-color: rgb(216, 216, 216);
+  margin-top: 1rem;
+  font-size: 1rem;
+  font-family: 'Raleway', sans-serif;
+  padding-bottom: 0.5rem;;
+}
+input:focus{
+  outline: none;
 }

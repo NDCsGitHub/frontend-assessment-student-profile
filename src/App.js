@@ -37,6 +37,7 @@ function App() {
 
   return (
     <div className='mainContainer'>
+      <input className='searchInput' placeholder='Search by name'></input>
       {students.map((student, index) => {
         return(
           <Card className='studentCardContainer' key={index}>
@@ -49,6 +50,7 @@ function App() {
                 <div>Company: {student.company}</div>
                 <div>Skill: {student.skill}</div>
                 <div>Average: {getAverageGrade(student.grades)}%</div>
+
               </div>
             </div>
           </Card>
