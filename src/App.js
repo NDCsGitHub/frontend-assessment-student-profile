@@ -3,24 +3,21 @@
 import React, {useState, useEffect}from 'react'
 import Axios from 'axios'
 import './App.css';
-import {Card} from 'react-bootstrap'
-import getAverageGrade from './utils/getAverageGrade'
+import StudentCard from './Components/StudentCard'
+
 
 function App() {
   const [students, setStudents] = useState([])
-  const [searchStudent, setSearchedStudent] = useState([])
-  const [search, setSearch] = useState()
-  const [loading, setLoading] = useState(true)
+  const [search, setSearch] = useState('')
 
+
+  // −
   // fetch student data and store it in state
   useEffect(()=>{
     async function fetchStudentData(){
       try{
         const res = await Axios.get('https://api.hatchways.io/assessment/students')
         setStudents(res.data.students)
-        setSearchedStudent(res.data.students)
-        setLoading(false)
-        console.log(students)
       }catch(err){
         console.log(err)
       }
@@ -28,43 +25,36 @@ function App() {
     fetchStudentData()
   },[])
 
-  // search and filter student
+  // search student first and last name
   function searchStudentFilter(){
-    return students && search !== "" ? students.filter(student => student.firstName[0].startsWith(search.toLowerCase()) || student.lastName.startsWith(search.toLowerCase())) : students;
+    if(search !==""){
+      return students.filter((student) => {
+        return student.firstName.toLowerCase().startsWith(search) || student.lastName.toLowerCase().startsWith(search)
+      })
+    }else{
+      return students
+    }
   }
 
-  
+
 
 
   return (
     <div className='mainContainer'>
       <input className='searchInput' placeholder='Search by name' 
       onChange={(e)=>{
-        setSearch(e.target.value)
+        setSearch(e.target.value.toLowerCase())
       }}
       />
-      
-      {students.map((student, index) => {
+
+      {searchStudentFilter().map((student, index) => {
         return(
-          <Card className='studentCardContainer' key={index}>
-            <Card.Img className='studentImg' src={student.pic} ></Card.Img>
-
-            <div className='nameContainer'>
-              <div className='firstName'>{(student.firstName+" "+student.lastName).toUpperCase()}</div>
-              <div className='detailContainer'>
-                <div>Email: {student.email}</div>
-                <div>Company: {student.company}</div>
-                <div>Skill: {student.skill}</div>
-                <div>Average: {getAverageGrade(student.grades)}%</div>
-
-              </div>
-            </div>
-          </Card>
-
+          <StudentCard student={student}/>
         )
       })
 
       }
+      
     </div>
   )
 }

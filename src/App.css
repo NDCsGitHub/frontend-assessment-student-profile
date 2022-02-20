@@ -27,8 +27,34 @@ html, body{
   flex-direction: row;
   justify-content: flex-start;
   align-items: start;
-  /* height:12.5rem; */
+  position: relative;
 }
+
+
+.expandButton{
+  position: absolute;
+  top:0.9rem;
+  right:0.8rem;
+  background: none;
+	color: rgb(226, 218, 218);
+	border: none;
+	padding: 0;
+	cursor: pointer;
+	outline: inherit;
+  font-size: 1.3rem;
+  font-weight: bold;
+  text-align: center;
+  font-stretch: expanded;
+}
+.buttonSign{
+  color: transparent;
+  text-shadow: 0 0 0 rgb(175, 175, 175);
+}
+.buttonSign:hover{
+  color: transparent;
+  text-shadow: 0 0 0 rgb(12, 12, 12);
+}
+
 
 .studentImg{
   border-radius: 50%;
