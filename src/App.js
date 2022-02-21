@@ -8,8 +8,9 @@ import StudentCard from './Components/StudentCard'
 
 function App() {
   const [students, setStudents] = useState([])
+  const studentsData = {students, setStudents}
   const [search, setSearch] = useState('')
-
+  
 
   // −
   // fetch student data and store it in state
@@ -24,6 +25,7 @@ function App() {
     }
     fetchStudentData()
   },[])
+
 
   // search student first and last name
   function searchStudentFilter(){
@@ -49,7 +51,7 @@ function App() {
 
       {searchStudentFilter().map((student, index) => {
         return(
-          <StudentCard student={student}/>
+          <StudentCard student={student} studentsData={studentsData} index={index} />
         )
       })
 

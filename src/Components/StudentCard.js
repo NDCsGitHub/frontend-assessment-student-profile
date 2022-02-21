@@ -1,9 +1,10 @@
-import React, {useState}from 'react'
+import React, {useEffect,useState}from 'react'
 import {Card} from 'react-bootstrap'
 import getAverageGrade from '../utils/getAverageGrade'
 
 
-export default function StudentCard({student}) {
+export default function StudentCard({student, studentsData, index}) {
+  
 
     // state and function for expand
     const [expand, setExpand] = useState(false)
@@ -14,14 +15,25 @@ export default function StudentCard({student}) {
 
     // keydown event enter for tag
     const [tags, setTags]=useState([])
-    const handleKeyDown = (e) => {
-      if (e.key === 'Enter') {
-        setTags([...tags,e.target.value])
-        e.target.value=''
+    function handleKeyDown(e){
+      if (e.key === 'Enter' && e.target.value) {
+          setTags([...tags,e.target.value])
+          e.target.value=''
       }
     }
-  
+     
+    
+    useEffect(()=>{
+      student['tags'] = tags;
+      console.log(studentsData.students[index])
+      console.log(tags)
+      console.log(student.tags)
+      console.log(tags)
 
+    }, [student, tags,studentsData.students, index])
+
+   
+  
 
   return (
     <Card className='studentCardContainer'>
@@ -63,11 +75,15 @@ export default function StudentCard({student}) {
 
           <div className='tagsInputContainer'>
             <div className='tagContainer'>
-              {tags.map((tag) => {
-                return <div className='tags'>{tag}</div>
-              })}
+              {studentsData.students[index].tags? (
+                studentsData.students[index].tags.map((tag) => {
+                  return <div className='tags'>{tag}</div>
+                })
+              ):(
+                null
+              )}
             </div>
-            <input className='searchInputTag' placeholder='Add a tag' onKeyDown={(e)=> handleKeyDown(e)}/>
+            <input className='searchInputTag' placeholder='Add a tag' onKeyUp={(e)=> handleKeyDown(e)}/>
           </div>
 
 
