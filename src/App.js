@@ -46,7 +46,8 @@ function App() {
             return false
           }
       
-        }else{
+        }
+        else{
           return(
             item.firstName.toLowerCase().includes(searchInput.current.value.toLowerCase()) ||
             item.lastName.toLowerCase().includes(searchInput.current.value.toLowerCase())
@@ -58,27 +59,6 @@ function App() {
   }
 
 
-  // // search by tag 
-  // function handleTagSearchInput(){
-  //   let searchedList = students.filter((item) => {
-  //     if(tagInput.current.value.toLowerCase() !==''){
-       
-
-  //     }else{
-  //       return students
-  //     }
-      
-  //   })
-  //   setSearchedStudent(searchedList)
-
-
-  //   if(searchedStudent===students){
-  //     console.log('same')
-  //   }
-
-
-
-  // }
 
 
 
@@ -91,7 +71,7 @@ function App() {
         onChange={handleSearchInputChange}
       />
 
-      <input classNAme='searchInput' ref={tagInput} placeholder='Search by tag' 
+      <input className='searchInput' ref={tagInput} placeholder='Search by tag' 
         onChange={handleSearchInputChange}
       />
 
