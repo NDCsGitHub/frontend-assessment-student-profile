@@ -1,9 +1,9 @@
-import React, {useEffect,useState}from 'react'
+import React, {useState}from 'react'
 import {Card} from 'react-bootstrap'
 import getAverageGrade from '../utils/getAverageGrade'
+import Tags from './Tags'
 
-
-export default function StudentCard({student, studentsData, index}) {
+export default function StudentCard({student, allStudent, index}) {
   
 
     // state and function for expand
@@ -13,30 +13,9 @@ export default function StudentCard({student, studentsData, index}) {
         setExpand(!expand)
       }
 
-    // keydown event enter for tag
-    const [tags, setTags]=useState([])
-    function handleKeyDown(e){
-      if (e.key === 'Enter' && e.target.value) {
-          setTags([...tags,e.target.value])
-          e.target.value=''
-      }
-    }
-     
     
-    useEffect(()=>{
-      student['tags'] = tags;
-      console.log(studentsData.students[index])
-      console.log(tags)
-      console.log(student.tags)
-      console.log(tags)
-
-    }, [student, tags,studentsData.students, index])
-
-   
-  
-
   return (
-    <Card className='studentCardContainer'>
+      <Card className='studentCardContainer'>
         <Card.Img className='studentImg' src={student.pic} ></Card.Img>
 
         <div className='nameContainer'>
@@ -74,16 +53,7 @@ export default function StudentCard({student, studentsData, index}) {
 
 
           <div className='tagsInputContainer'>
-            <div className='tagContainer'>
-              {studentsData.students[index].tags? (
-                studentsData.students[index].tags.map((tag) => {
-                  return <div className='tags'>{tag}</div>
-                })
-              ):(
-                null
-              )}
-            </div>
-            <input className='searchInputTag' placeholder='Add a tag' onKeyUp={(e)=> handleKeyDown(e)}/>
+            <Tags allStudent={allStudent} student={student} index={index} />
           </div>
 
 
@@ -91,6 +61,6 @@ export default function StudentCard({student, studentsData, index}) {
 
         </div>
 
-    </Card>
-  )
+      </Card>
+  ) 
 }

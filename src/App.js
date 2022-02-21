@@ -8,17 +8,17 @@ import StudentCard from './Components/StudentCard'
 
 function App() {
   const [students, setStudents] = useState([])
-  const studentsData = {students, setStudents}
   const [search, setSearch] = useState('')
-  
+  const [searchedStudent, setSearchedStudent] =useState([])
 
-  // −
+
   // fetch student data and store it in state
   useEffect(()=>{
     async function fetchStudentData(){
       try{
         const res = await Axios.get('https://api.hatchways.io/assessment/students')
         setStudents(res.data.students)
+        setSearchedStudent(res.data.students)
       }catch(err){
         console.log(err)
       }
@@ -28,35 +28,42 @@ function App() {
 
 
   // search student first and last name
-  function searchStudentFilter(){
-    if(search !==""){
-      return students.filter((student) => {
-        return student.firstName.toLowerCase().startsWith(search) || student.lastName.toLowerCase().startsWith(search)
-      })
-    }else{
-      return students
-    }
+  function handleSearchInputChange(e){
+    e.preventDefault()
+    let searchTerm = e.target.value.toLowerCase();
+    let searchedList = students.filter((item) => 
+      item.firstName.toLowerCase().includes(searchTerm) ||
+      item.lastName.toLowerCase().includes(searchTerm)
+    )
+    setSearchedStudent(searchedList)
   }
+
+  // function searchStudentFilter(){
+  //   if(search !==""){
+  //     return students.filter((student) => {
+  //       return student.firstName.toLowerCase().startsWith(search) || student.lastName.toLowerCase().startsWith(search)
+  //     })
+  //   }else{
+  //     return students
+  //   }
+  // }
 
 
 
 
   return (
     <div className='mainContainer'>
+
       <input className='searchInput' placeholder='Search by name' 
-      onChange={(e)=>{
-        setSearch(e.target.value.toLowerCase())
-      }}
+        onChange={handleSearchInputChange}
       />
 
-      {searchStudentFilter().map((student, index) => {
+      {searchedStudent.map((student, index) => {
         return(
-          <StudentCard student={student} studentsData={studentsData} index={index} />
+          <StudentCard key={student.id} student={student} allStudents={students} index={index} />
         )
-      })
+      })}
 
-      }
-      
     </div>
   )
 }
