@@ -3,7 +3,7 @@ import {Card} from 'react-bootstrap'
 import getAverageGrade from '../utils/getAverageGrade'
 import Tags from './Tags'
 
-export default function StudentCard({student, allStudent, index}) {
+export default function StudentCard({student, allStudents, index}) {
   
 
     // state and function for expand
@@ -53,7 +53,7 @@ export default function StudentCard({student, allStudent, index}) {
 
 
           <div className='tagsInputContainer'>
-            <Tags allStudent={allStudent} student={student} index={index} />
+            <Tags allStudents={allStudents} student={student} index={index} />
           </div>
 
 

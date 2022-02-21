@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useState} from 'react'
 
 export default function Tags({student, allStudents, index}) {
@@ -24,7 +25,8 @@ export default function Tags({student, allStudents, index}) {
 
 
   useEffect(()=>{
-    console.log(student.tags)
+    // console.log(student.tags)
+    // console.log(allStudents)
   },[tags])
 
   function onChangeTagName(e){

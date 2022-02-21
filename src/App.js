@@ -1,14 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
-import React, {useState, useEffect}from 'react'
+import React, {useState, useRef, useEffect}from 'react'
 import Axios from 'axios'
 import './App.css';
 import StudentCard from './Components/StudentCard'
 
 
 function App() {
+  const searchInput = useRef()
+  const tagInput = useRef()
   const [students, setStudents] = useState([])
-  const [search, setSearch] = useState('')
   const [searchedStudent, setSearchedStudent] =useState([])
 
 
@@ -28,25 +29,57 @@ function App() {
 
 
   // search student first and last name
-  function handleSearchInputChange(e){
-    e.preventDefault()
-    let searchTerm = e.target.value.toLowerCase();
-    let searchedList = students.filter((item) => 
-      item.firstName.toLowerCase().includes(searchTerm) ||
-      item.lastName.toLowerCase().includes(searchTerm)
-    )
+  function handleSearchInputChange(){
+    let searchedList = students.filter((item) =>{
+        if(tagInput.current.value.toLowerCase() !== ''){
+          if(item.tags){
+            for(let i = 0; i<item.tags.length; i++){
+              if(
+                item.tags[i].toLowerCase().includes(tagInput.current.value.toLowerCase())&&
+                (item.firstName.toLowerCase().includes(searchInput.current.value.toLowerCase())||
+                item.lastName.toLowerCase().includes(searchInput.current.value.toLowerCase()))
+              ){
+                return true
+              }
+            }
+          }else{
+            return false
+          }
+      
+        }else{
+          return(
+            item.firstName.toLowerCase().includes(searchInput.current.value.toLowerCase()) ||
+            item.lastName.toLowerCase().includes(searchInput.current.value.toLowerCase())
+          )
+        }
+
+    })
     setSearchedStudent(searchedList)
   }
 
-  // function searchStudentFilter(){
-  //   if(search !==""){
-  //     return students.filter((student) => {
-  //       return student.firstName.toLowerCase().startsWith(search) || student.lastName.toLowerCase().startsWith(search)
-  //     })
-  //   }else{
-  //     return students
+
+  // // search by tag 
+  // function handleTagSearchInput(){
+  //   let searchedList = students.filter((item) => {
+  //     if(tagInput.current.value.toLowerCase() !==''){
+       
+
+  //     }else{
+  //       return students
+  //     }
+      
+  //   })
+  //   setSearchedStudent(searchedList)
+
+
+  //   if(searchedStudent===students){
+  //     console.log('same')
   //   }
+
+
+
   // }
+
 
 
 
@@ -54,7 +87,11 @@ function App() {
   return (
     <div className='mainContainer'>
 
-      <input className='searchInput' placeholder='Search by name' 
+      <input className='searchInput' ref={searchInput} placeholder='Search by name' 
+        onChange={handleSearchInputChange}
+      />
+
+      <input classNAme='searchInput' ref={tagInput} placeholder='Search by tag' 
         onChange={handleSearchInputChange}
       />
 
