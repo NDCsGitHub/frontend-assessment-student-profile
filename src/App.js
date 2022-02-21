@@ -31,6 +31,12 @@ function App() {
   // search student first and last name
   function handleSearchInputChange(){
     let searchedList = students.filter((item) =>{
+
+      /*check to see if tagInput has any value, if it doesnt, we can simply filter by first and last name -->
+      if it does have value, we then check if individual student has tags = if it doesnt have tags, we simply 
+      return false for them so they dont appear on the student list --> if particular student has tags, 
+      then we loop over the tags and look for any of the tags matches with our tagInput value, and we also 
+      check to see if any of the first or last name matches with searchInput value and we return true for those. */
         if(tagInput.current.value.toLowerCase() !== ''){
           if(item.tags){
             for(let i = 0; i<item.tags.length; i++){
@@ -46,15 +52,14 @@ function App() {
             return false
           }
       
-        }
-        else{
+        }else{
           return(
             item.firstName.toLowerCase().includes(searchInput.current.value.toLowerCase()) ||
             item.lastName.toLowerCase().includes(searchInput.current.value.toLowerCase())
           )
         }
-
     })
+
     setSearchedStudent(searchedList)
   }
 
