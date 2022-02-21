@@ -5,11 +5,22 @@ import getAverageGrade from '../utils/getAverageGrade'
 
 export default function StudentCard({student}) {
 
+    // state and function for expand
     const [expand, setExpand] = useState(false)
     const toggleExpand = (e)=>{
         e.preventDefault()
         setExpand(!expand)
       }
+
+    // keydown event enter for tag
+    const [tags, setTags]=useState([])
+    const handleKeyDown = (e) => {
+      if (e.key === 'Enter') {
+        setTags([...tags,e.target.value])
+        e.target.value=''
+      }
+    }
+  
 
 
   return (
@@ -23,6 +34,7 @@ export default function StudentCard({student}) {
           {expand? <span className='buttonSign'>&#x2796;</span> : <span className='buttonSign'>&#x2795;</span> }
           </button>
 
+
           <div className='detailContainer'>
               <div>Email: {student.email}</div>
               <div>Company: {student.company}</div>
@@ -30,14 +42,36 @@ export default function StudentCard({student}) {
               <div>Average: {getAverageGrade(student.grades)}%</div>
           </div>
 
-          <div>
-            {expand? (
-              <h1>hello</h1> 
-            ):(
-              null
-            )}
+
+
+          {expand?(
+            <div className='expandDetail'>{
+              student.grades.map((grade) => {
+                return (
+                  <div className='gradeContainer'>
+                    <div>Test{student.grades.indexOf(grade) + 1}:</div>
+                    <div className='grades'>{grade}%</div>
+                  </div>
+                )
+              })
+            }</div> 
+          ):(
+            null
+          )}
+ 
+
+
+          <div className='tagsInputContainer'>
+            <div className='tagContainer'>
+              {tags.map((tag) => {
+                return <div className='tags'>{tag}</div>
+              })}
+            </div>
+            <input className='searchInputTag' placeholder='Add a tag' onKeyDown={(e)=> handleKeyDown(e)}/>
           </div>
-        
+
+
+
 
         </div>
 

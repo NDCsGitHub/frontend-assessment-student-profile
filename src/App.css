@@ -76,12 +76,13 @@ html, body{
 }
 
 .detailContainer{
-  margin: 5px 0px 10px 24px;
+  margin: 5px 0px 0px 24px;
 }
 
 .detailContainer *{
   padding:2px;
   font-size: 1.2rem;
+  color: black;
 }
 
 .searchInput{
@@ -91,10 +92,52 @@ html, body{
   border-width: 0 0 1px;
   border-color: rgb(216, 216, 216);
   margin-top: 1rem;
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-family: 'Raleway', sans-serif;
   padding-bottom: 0.5rem;;
 }
 input:focus{
   outline: none;
+}
+
+
+.expandDetail{
+  margin: 0.9rem 0rem 0.4rem 1.5rem;
+}
+.gradeContainer{
+  display:flex;
+  flex-direction: row;
+}
+.grades{
+  margin-left:2.5rem;
+}
+
+.tagsInputContainer{
+  margin: 5px 0px 10px 25px;
+}
+
+.searchInputTag{
+  width:60%;
+  align-self: center;
+  outline: 0;
+  border-width: 0 0 1px;
+  border-color: rgb(216, 216, 216);
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  font-family: 'Raleway', sans-serif;
+  padding-bottom: 0.5rem;;
+}
+
+.tagContainer{
+  display:flex;
+  flex-direction: row;
+  margin-left: 0.2rem;
+}
+
+.tags{
+  background-color: rgb(218, 218, 218);
+  margin-left: 0.2rem;
+  padding: 0.3rem 0.5rem 0.3rem 0.5rem;
+  border-radius: 5px;
 }
